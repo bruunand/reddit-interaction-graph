@@ -18,6 +18,7 @@ df = df[~df.user.isin(top_users)]
 df['pair'] = list(zip(df.source, df.destination))
 df.pair = df.pair.apply(lambda pair: tuple(sorted(pair)))
 
+# Count interactions between subreddits, including the type of interaction
 df['triple'] = list(zip(df.pair, df.relationship))
 triple_counts = dict(df.triple.value_counts())
 df['interactions'] = df.triple.apply(lambda triple: triple_counts.get(triple))
